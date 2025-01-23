@@ -75,32 +75,33 @@ tabs.forEach(tab => {
 /*==================== SERVICES MODAL ====================*/
 
 const modalViews = document.querySelectorAll('.services__modal'),
-      modalBtns = document.querySelectorAll('.services__button'),
-      modalCloses = document.querySelectorAll('.services__modal-close');
+    modalBtns = document.querySelectorAll('.services__button'),
+    modalCloses = document.querySelectorAll('.services__modal-close')
 
-const openModal = (index) => {
-    modalViews[index].classList.add('active-modal');
-};
+let modal = function (modalClick) {
+    modalViews[modalClick].classList.add('active-modal')
+}
 
-const closeModal = () => {
-    modalViews.forEach(modalView => modalView.classList.remove('active-modal'));
-};
+modalBtns.forEach((modalBtn, i) => {
+    modalBtn.addEventListener('click', () => {
+        modal(i);
+    })
+})
 
-// Add event listeners for opening modals
-modalBtns.forEach((btn, index) => {
-    btn.addEventListener('click', () => openModal(index));
-});
-
-// Add event listeners for closing modals
-modalCloses.forEach(closeBtn => {
-    closeBtn.addEventListener('click', closeModal);
-});
+modalCloses.forEach((modalClose) => {
+    modalClose.addEventListener('click', () => {
+        modalViews.forEach((modalView) => {
+            modalView.classList.remove('active-modal');
+        })
+    })
+})
 
 
 /*==================== PORTFOLIO SWIPER  ====================*/
 let swiperPortfolio = new Swiper('.portfolio__container', {
     cssMode: true,
-    loop: false, // Disable looping
+    loop: false,
+
     navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
@@ -113,8 +114,8 @@ let swiperPortfolio = new Swiper('.portfolio__container', {
     on: {
         init: function () {
             document.querySelector('.portfolio__container').style.visibility = 'visible';
-        }
-    }
+        }
+    }
 });
 
 
@@ -276,6 +277,3 @@ let letter = '';
     setTimeout(type, 100); // Adjust typing speed here
   }
 })();
-
-
-
